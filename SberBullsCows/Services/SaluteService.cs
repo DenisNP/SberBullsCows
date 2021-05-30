@@ -41,8 +41,11 @@ namespace SberBullsCows.Services
             // enter
             if (request.IsEnter)
                 HandleEnter(request, response, user);
-            
-            else if (request.HasWords("помощь", "что уметь", "помогать", "помочь", "правило", "рассказать правило", "правило игра", "показать правило", "открыть правило"))
+
+            else if (
+                request.HasWords("помощь", "что уметь", "помогать", "помочь", "правило", "рассказать правило",
+                    "правило игра", "показать правило", "открыть правило")
+            )
                 HandleHelp(response, session);
             
             else if (request.HasWords("выход", "выйти", "закрыть", "закрой"))
@@ -50,10 +53,16 @@ namespace SberBullsCows.Services
             
             else if (!session.GameStarted) // start new game
             {
-                if (request.HasWords("сложный игра", "начать сложный игра", "новый сложный игра", "сложный") || request.HasCommand("start_hard"))
+                if (
+                    request.HasWords("сложный игра", "начать сложный игра", "новый сложный игра", "сложный")
+                    || request.HasCommand("start_hard")
+                )
                     StartGame(request, response, user, session, true);
-                
-                else if (request.HasWords("простой игра", "начать простой игра", "новый простой игра", "новый игра", "простой") || request.HasCommand("start_lite"))
+
+                else if (
+                    request.HasWords("простой игра", "начать простой игра", "новый простой игра", "новый игра", "простой")
+                    || request.HasCommand("start_lite")
+                )
                     StartGame(request, response, user, session, false);
 
                 else
@@ -69,7 +78,8 @@ namespace SberBullsCows.Services
 
         private void HandleNewWord(SaluteRequest request, SaluteResponse response, SessionState session, UserState user)
         {
-            if (request.Tokens.Length == 0) return; // empty response
+            if (request.Tokens.Length == 0)
+                return; // empty response
             
             string word = request.Tokens.First().ToLower();
             string currentWord = session.CurrentWord;
@@ -169,7 +179,7 @@ namespace SberBullsCows.Services
                 .AppendText(
                     request,
                     new Phrase(
-                        "Скажите, какую игру хотите начать: простую или сложную. Можете также попросить меня рассказать правила.",
+                        "Скажите, какую игру хотите начать: простую или сложную. Можете попросить меня рассказать правила.",
                         "Выберите сложность для начала игру: простую или сложную. Либо я могу рассказать правила.",
                         "Какую игру хочешь начать, простую или сложную? Можешь также попросить меня рассказать правила!"
                     )
@@ -239,9 +249,12 @@ namespace SberBullsCows.Services
                 .AppendText(
                     request,
                     new Phrase(
-                        "Здравствуйте. Это игра «Быки и коровы» со словами. Если знаете, как играть, можете начать простую или сложную игру. Либо я расскажу вам правила.",
-                        "Здравствуйте. Это игра «Быки и коровы» со словами. Если знаете, как играть, выберите простую или сложную игру. Либо я расскажу вам правила.",
-                        "Привет! Это игра «Быки и коровы» со словами. Если знаешь, как играть, начинай простую или сложную игру. Либо я расскажу тебе правила."
+                        "Здравствуйте. Это игра «Быки и коровы» со словами. Если знаете, как играть, можете начать " +
+                        "простую или сложную игру. Либо я расскажу вам правила.",
+                        "Здравствуйте. Это игра «Быки и коровы» со словами. Если знаете, как играть, выберите " +
+                        "простую или сложную игру. Либо я расскажу вам правила.",
+                        "Привет! Это игра «Быки и коровы» со словами. Если знаешь, как играть, начинай " +
+                        "простую или сложную игру. Либо я расскажу тебе правила."
                     )
                 )
                 .AppendSendData("state", JsonConvert.SerializeObject(session))
