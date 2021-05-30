@@ -93,7 +93,7 @@
 }
 
 .rules-button {
-    z-index: 3;
+    z-index: 2;
     position: fixed;
     top: 20px;
     right: 20px;
@@ -121,7 +121,6 @@
         top: 20px;
         left: 20px!important;
         right: unset!important;
-        z-index: 3;
     }
 }
 
