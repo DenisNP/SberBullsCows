@@ -78,9 +78,18 @@ namespace SberBullsCows.Services
         {
             if (request.Tokens.Length == 0)
                 return; // empty response
-            
+
             string word = request.Tokens.First().ToLower();
             string currentWord = session.CurrentWord;
+
+            if (word.Length < currentWord.Length)
+            {
+                response
+                    .AppendText($"Слово {word} слишком короткое!")
+                    .AppendSuggestions("Помощь", "Выйти из игры");
+                
+                return;
+            }
             
             // check if game is finished
             if (word == currentWord)
