@@ -138,7 +138,7 @@ namespace SberBullsCows.Services
                     $"В слове {word} {cowsText} и " +
                     $"{bulls.ToPhrase("бык", "быка", "быков")}."
                 )
-                .AppendSuggestions("Правила", "Выход");
+                .AppendSuggestions("Правила", "Выйти из игры");
             
             response.Payload.AutoListening = true;
         }
