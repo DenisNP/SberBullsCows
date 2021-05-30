@@ -57,7 +57,11 @@ namespace SberBullsCows.Helpers
 
         public static SaluteResponse AppendSuggestions(this SaluteResponse response, params string[] suggestions)
         {
-            response.Payload.Suggestions = new Suggestions(suggestions);
+            if (response.Payload.Suggestions == null)
+                response.Payload.Suggestions = new Suggestions(suggestions);
+            else
+                response.Payload.Suggestions.Append(suggestions);
+            
             return response;
         }
     }

@@ -19,8 +19,6 @@ namespace SberBullsCows.Services
         private readonly IStateStorage<SessionState> _sessionStateStorage;
         private readonly ContentService _contentService;
 
-        private readonly Random _random = new();
-
         public SaluteService(
             IStateStorage<UserState> userStateStorage,
             IStateStorage<SessionState> sessionStateStorage,
@@ -73,7 +71,7 @@ namespace SberBullsCows.Services
                 HandleNewWord(request, response, session, user);
             }
             
-            return response.AppendSuggestions("Помощь", "Выход");
+            return response;
         }
 
         private void HandleNewWord(SaluteRequest request, SaluteResponse response, SessionState session, UserState user)

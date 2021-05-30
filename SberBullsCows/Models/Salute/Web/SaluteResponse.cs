@@ -96,6 +96,11 @@ namespace SberBullsCows.Models.Salute.Web
         {
             Buttons = suggestions.Select(s => new Suggestion(s)).ToList();
         }
+
+        public void Append(params string[] suggestions)
+        {
+            Buttons.AddRange(suggestions.Select(s => new Suggestion(s)));
+        }
     }
     
     public class Emotion
