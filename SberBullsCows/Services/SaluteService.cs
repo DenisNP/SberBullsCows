@@ -11,7 +11,7 @@ namespace SberBullsCows.Services
 {
     public class SaluteService
     {
-        private const int StartingScore = 10;
+        private const int StartingScore = 20;
         private const int AdditionalScore = 5;
         private const int WordsToStore = 50;
         

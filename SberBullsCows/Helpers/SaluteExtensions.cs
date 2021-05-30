@@ -11,7 +11,7 @@ namespace SberBullsCows.Helpers
 
         public static bool HasCommand(this SaluteRequest request, string command)
         {
-            return request.Payload?.ServerAction.ActionId == command;
+            return request.Payload?.ServerAction?.ActionId == command;
         }
 
         public static bool HasWords(this SaluteRequest request, params string[] expected)
