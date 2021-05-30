@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
@@ -17,6 +18,23 @@ namespace SberBullsCows.Pages
         public bool Informal { get; set; }
 
         public SessionState State { get; set; } = new();
+
+        public List<WordSaid> WordsOrdered
+        {
+            get
+            {
+                if (State.WordsSaid.Count <= 1)
+                    return State.WordsSaid;
+
+                WordSaid last = State.WordsSaid.Last();
+                return State.WordsSaid
+                    .Take(State.WordsSaid.Count - 1)
+                    .OrderByDescending(ws => ws.Bulls * 2 + ws.Cows)
+                    .Prepend(last)
+                    .ToList();
+            }
+        }
+        
         public bool RulesOpened { get; set; } = false;
 
         protected override Task OnInitializedAsync()
@@ -56,6 +74,16 @@ namespace SberBullsCows.Pages
                 Informal = command.Character == "joy";
                 StateHasChanged();
             }
+        }
+
+        public void StartGame(bool isHard = false)
+        {
+            SendData(isHard ? "start_hard" : "start_lite", new Dictionary<string, object>(), true);
+        }
+        
+        protected void SendData(string action, Dictionary<string, object> data, bool enableCallback = false)
+        {
+            Js.InvokeVoidAsync("sendData", action, data, enableCallback);
         }
 
         public void ShowHideRules()

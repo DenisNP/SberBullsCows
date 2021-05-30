@@ -1,4 +1,41 @@
 ﻿@page "/"
+@using SberBullsCows.Helpers
+@using SberBullsCows.Models
 @inherits MainPage
 
-<div>111</div>
+@if (RulesOpened)
+{
+    <div class="rules">
+        
+    </div>
+}
+else if (!State.GameStarted)
+{
+    <div class="menu">
+        <button class="menu-button" @onclick="() => StartGame()">Простая игра</button>
+        <button class="menu-button" @onclick="() => StartGame(true)">Сложная игра</button>
+    </div>
+}
+@if (!State.CurrentWord.IsNullOrEmpty())
+{
+    <div class="main-container">
+        <div class="word">@Enumerable.Repeat("-", State.CurrentWord.Length)</div>
+        <div class="words-said">
+            @foreach (WordSaid wordSaid in WordsOrdered)
+            {
+                <div class="word-line">
+                    <span class="counts">@(wordSaid.Bulls + "🐃 " + wordSaid.Cows + "🐄")</span>
+                    <span class="word-said">
+                        <span>@wordSaid.Word.ToUpper().SafeSubstring(State.CurrentWord.Length)</span>
+                        <span style="opacity: 0.5;">
+                            @(wordSaid.Word.Length > State.CurrentWord.Length
+                                ? wordSaid.Word.ToUpper()[State.CurrentWord.Length..]
+                                : ""
+                                )
+                        </span>
+                    </span>
+                </div>
+            }
+        </div>
+    </div>
+}

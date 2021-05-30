@@ -1,0 +1,56 @@
+.rules {
+    
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0 0 10px;
+    background: #0000003b;
+    width: calc(100vw - 20px);
+    height: calc(100vh - 20px - var(--bottom-inset));
+    border-radius: 20px;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.menu-button {
+    padding: 0;
+    border: none;
+    outline: none;
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    width: min(400px, calc(100vw - 60px));
+    height: 100px;
+    margin-bottom: 20px;
+    border-radius: 20px;
+    background: #0000003d;
+    color: white;
+    font-size: min(30px, 7vw);
+}
+
+.main-container {
+    
+}
+
+.word {
+    
+}
+
+.words-said {
+    
+}
+
+.word-line {
+
+}
+
+.word-said {
+    
+}
+
+.counts {
+    
+}

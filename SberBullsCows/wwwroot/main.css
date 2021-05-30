@@ -9,9 +9,7 @@ html, body {
 body {
     display: flex;
     flex-direction: column;
-    
-    background-image: url(../bg.jpg);
-    background-repeat: repeat;
+    background: linear-gradient(128deg, rgba(22,112,66,1) 0%, rgba(47,58,96,1) 100%);
 }
 
 * {
@@ -36,8 +34,8 @@ button {
 
 button:focus {
     outline: none;
-    box-shadow: 0 0 10px 3px #ffffff;
-    background-color: rgb(231 250 255) !important;
+    box-shadow: 0 0 15px 3px #ffffff;
+    /*background-color: rgb(231 250 255) !important;*/
 }
 
 .flex-center {

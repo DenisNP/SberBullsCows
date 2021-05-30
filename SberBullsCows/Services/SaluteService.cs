@@ -116,10 +116,17 @@ namespace SberBullsCows.Services
             _sessionStateStorage.SetState(request.UserId, session);
             
             // generate response
+            string cowsText = cows switch
+            {
+                1 => "одна корова",
+                2 => "две коровые",
+                _ => cows.ToPhrase("корова", "коровы", "коров")
+            };
+
             response
                 .AppendSendData("state", JsonConvert.SerializeObject(session))
                 .AppendText(
-                    $"В слове {word} {cows.ToPhrase("корова", "коровы", "коров")} и " +
+                    $"В слове {word} {cowsText} и " +
                     $"{bulls.ToPhrase("бык", "быка", "быков")}."
                 )
                 .AppendSuggestions("Правила", "Выход");
