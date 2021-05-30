@@ -87,7 +87,7 @@ namespace SberBullsCows.Services
                 response
                     .AppendText($"Слово {word} слишком короткое!")
                     .AppendSuggestions("Помощь", "Выйти из игры");
-                
+                response.Payload.AutoListening = true;
                 return;
             }
             
