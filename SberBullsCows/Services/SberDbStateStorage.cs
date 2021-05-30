@@ -13,7 +13,7 @@ namespace SberBullsCows.Services
 
         private void Init()
         {
-            _appHash = Environment.GetEnvironmentVariable("SBERDB_HASH_SIZE");
+            _appHash = Environment.GetEnvironmentVariable("SBERDB_HASH_COWSBULLS");
             
             if (string.IsNullOrEmpty(_appHash))
                 throw new ArgumentNullException(nameof(_appHash), "Invalid state storage hash");
