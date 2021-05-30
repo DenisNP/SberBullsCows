@@ -19,17 +19,22 @@ else if (!State.GameStarted)
 @if (!State.CurrentWord.IsNullOrEmpty())
 {
     <div class="main-container">
-        <div class="word">@Enumerable.Repeat("-", State.CurrentWord.Length)</div>
+        <span class="word-top">
+            <span class="left-width score">@ScoreText</span><div class="green">@(CurrentWordShown)</div>
+        </span>
         <div class="words-said">
             @foreach (WordSaid wordSaid in WordsOrdered)
             {
                 <div class="word-line">
-                    <span class="counts">@(wordSaid.Bulls + "🐃 " + wordSaid.Cows + "🐄")</span>
+                    <span class="counts left-width">
+                        <span class="@(wordSaid.Bulls > 0 ? "green" : "")"> @(wordSaid.Bulls + "🐃 ")</span>
+                        <span class="@(wordSaid.Cows > 0 ? "green" : "")"> @(wordSaid.Cows + "🐄")</span>
+                    </span>
                     <span class="word-said">
                         <span>@wordSaid.Word.ToUpper().SafeSubstring(State.CurrentWord.Length)</span>
                         <span style="opacity: 0.5;">
                             @(wordSaid.Word.Length > State.CurrentWord.Length
-                                ? wordSaid.Word.ToUpper()[State.CurrentWord.Length..]
+                                ? GetTail(wordSaid.Word.ToUpper()[State.CurrentWord.Length..])
                                 : ""
                                 )
                         </span>
@@ -39,3 +44,4 @@ else if (!State.GameStarted)
         </div>
     </div>
 }
+<button class="rules-button" @onclick="ShowHideRules">@(RulesOpened ? "✖" : "Правила")</button>

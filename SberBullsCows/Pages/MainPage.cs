@@ -34,6 +34,12 @@ namespace SberBullsCows.Pages
                     .ToList();
             }
         }
+
+        public string CurrentWordShown => State.CurrentWord.IsNullOrEmpty()
+            ? ""
+            : (State.GameStarted ? "-----"[..State.CurrentWord.Length] : State.CurrentWord.ToUpper());
+
+        public string ScoreText => State.ScoreGot == 0 ? "" : $"+{State.ScoreGot.ToPhrase("очко", "очка", "очков")}";
         
         public bool RulesOpened { get; set; } = false;
 
@@ -89,6 +95,14 @@ namespace SberBullsCows.Pages
         public void ShowHideRules()
         {
             RulesOpened = !RulesOpened;
+            if (RulesOpened)
+                SendData("tell_rules", new Dictionary<string, object>());
+        }
+
+        public string GetTail(string s)
+        {
+            if (s.Length <= 3) return s;
+            return s.Substring(0, 2) + "…";
         }
 
         protected void Close()

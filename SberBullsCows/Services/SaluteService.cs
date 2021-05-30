@@ -43,32 +43,32 @@ namespace SberBullsCows.Services
             else if (
                 request.HasWords("помощь", "что уметь", "помогать", "помочь", "правило", "рассказать правило",
                     "правило игра", "показать правило", "открыть правило")
+                || request.HasCommand("tell_rules")
             )
                 HandleHelp(response, session);
             
-            else if (request.HasWords("выход", "выйти", "закрыть", "закрой"))
+            else if (request.HasWords("выйти", "закрыть", "закрой"))
                 HandleExit(request, response);
             
-            else if (!session.GameStarted) // start new game
-            {
-                if (
-                    request.HasWords("сложный игра", "начать сложный игра", "новый сложный игра", "сложный")
-                    || request.HasCommand("start_hard")
-                )
-                    StartGame(request, response, user, session, true);
+            else if (
+                request.HasWords("сложный игра", "начать сложный игра", "новый сложный игра", "сложный")
+                || request.HasCommand("start_hard")
+            )
+                StartGame(request, response, user, session, true);
 
-                else if (
-                    request.HasWords("простой игра", "начать простой игра", "новый простой игра", "новый игра", "простой")
-                    || request.HasCommand("start_lite")
-                )
-                    StartGame(request, response, user, session, false);
+            else if (
+                request.HasWords("простой игра", "начать простой игра", "новый простой игра", "новый игра", "простой")
+                || request.HasCommand("start_lite")
+            )
+                StartGame(request, response, user, session, false);
 
-                else
-                    HandleDontKnow(request, response);
-            }
-            else // game started, got new guess from player
+            else if (session.GameStarted) // game started, got new guess from player
             {
                 HandleNewWord(request, response, session, user);
+            }
+            else
+            {
+                HandleDontKnow(request, response);
             }
             
             return response;
@@ -173,7 +173,7 @@ namespace SberBullsCows.Services
                     $"Если хочешь, можешь начать новую простую или сложную игру."
                 ))
                 .AppendSendData("state", JsonConvert.SerializeObject(session))
-                .AppendSuggestions("Простая игра", "Сложная игра", "Правила", "Выход");
+                .AppendSuggestions("Простая игра", "Сложная игра", "Правила", "Выйти");
             
             response.Payload.AutoListening = true;
         }
@@ -189,7 +189,7 @@ namespace SberBullsCows.Services
                         "Какую игру хочешь начать, простую или сложную? Можешь также попросить меня рассказать правила!"
                     )
                 )
-                .AppendSuggestions("Простая игра", "Сложная игра", "Правила", "Выход");
+                .AppendSuggestions("Простая игра", "Сложная игра", "Правила", "Выйти");
         }
 
         private void StartGame(SaluteRequest request, SaluteResponse response, UserState user, SessionState session, bool isHard)
@@ -214,7 +214,7 @@ namespace SberBullsCows.Services
                     $"Начнём новую игру! Я загадала слово из {lettersText}. Называй мне своё слово в ответ, а я " +
                     $"буду говорить, сколько в нём быков и коров."
                 ))
-                .AppendSuggestions("Правила", "Выход");
+                .AppendSuggestions("Правила", "Выйти");
 
             response.Payload.AutoListening = true;
         }
@@ -263,7 +263,7 @@ namespace SberBullsCows.Services
                     )
                 )
                 .AppendSendData("state", JsonConvert.SerializeObject(session))
-                .AppendSuggestions("Простая игра", "Сложная игра", "Правила", "Выход");
+                .AppendSuggestions("Простая игра", "Сложная игра", "Правила", "Выйти");
 
             response.Payload.AutoListening = true;
         }

@@ -1,11 +1,6 @@
-.rules {
-    
-}
-
-.menu {
+.menu, .rules {
     display: flex;
     flex-direction: column;
-    margin: 10px 0 0 10px;
     background: #0000003b;
     width: calc(100vw - 20px);
     height: calc(100vh - 20px - var(--bottom-inset));
@@ -15,28 +10,55 @@
     position: absolute;
     top: 10px;
     left: 10px;
+    z-index: 1;
+}
+
+.rules {
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+    background: rgba(0, 0, 0, 0.4);
 }
 
 .menu-button {
-    padding: 0;
-    border: none;
-    outline: none;
-    font-family: Avenir, Helvetica, Arial, sans-serif;
     width: min(400px, calc(100vw - 60px));
     height: 100px;
     margin-bottom: 20px;
     border-radius: 20px;
-    background: #0000003d;
+    background: #0000004f;
     color: white;
     font-size: min(30px, 7vw);
+    z-index: 1;
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
 }
 
 .main-container {
-    
+    margin: 50px auto 0 auto;
+    font-family: PTMono, monospace;
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    letter-spacing: 4px;
+}
+
+.left-width {
+    width: 200px;
+}
+
+.score {
+    letter-spacing: -1px;
+    font-weight: 100;
 }
 
 .word {
     
+}
+
+.word-top {
+    display: flex;
+    border-bottom: 2px solid white;
+    width: fit-content;
+    margin-bottom: 10px;
 }
 
 .words-said {
@@ -44,13 +66,74 @@
 }
 
 .word-line {
-
+    display: flex;
+    align-items: flex-end;
 }
 
 .word-said {
-    
+    display: flex;
 }
 
 .counts {
+    font-weight: 100;
+    display: flex;
+}
+
+.counts > span {
+    color: #ffffff70;
+}
+
+.green {
+    color: lawngreen!important;
+}
+
+.rules-button {
+    z-index: 2;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    border-radius: 8px;
+    background: #0000004f;
+    color: white;
+    padding: 0 20px;
+    font-size: 18px;
+    height: 40px;
+}
+
+@media (max-width: 767px) {
+    .main-container {
+        font-size: 23px;
+    }
     
+    .left-width {
+        width: 150px;
+    }
+    
+    .rules-button {
+        padding: 0 13px;
+        font-size: 14px;
+        height: 35px;
+    }
+}
+
+@media (min-width: 1281px) {
+    .main-container {
+        font-size: 50px;
+    }
+
+    .left-width {
+        width: 320px;
+    }
+    
+    .rules-button {
+        transform: scale(1.5);
+        transform-origin: right top;
+    }
+    
+    .menu-button {
+        font-size: 40px;
+        width: 480px;
+        height: 115px;
+        margin-bottom: 25px;
+    }
 }
