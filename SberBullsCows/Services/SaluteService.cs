@@ -47,7 +47,7 @@ namespace SberBullsCows.Services
             )
                 HandleHelp(response, session);
             
-            else if (request.HasWords("выйти", "закрыть", "закрой"))
+            else if (request.HasWords("выйти", "закрыть", "закрой", "выйти игра"))
                 HandleExit(request, response);
             
             else if (
@@ -119,7 +119,7 @@ namespace SberBullsCows.Services
             string cowsText = cows switch
             {
                 1 => "одна корова",
-                2 => "две коровые",
+                2 => "две коровы",
                 _ => cows.ToPhrase("корова", "коровы", "коров")
             };
 
@@ -173,7 +173,7 @@ namespace SberBullsCows.Services
                     $"Если хочешь, можешь начать новую простую или сложную игру."
                 ))
                 .AppendSendData("state", JsonConvert.SerializeObject(session))
-                .AppendSuggestions("Простая игра", "Сложная игра", "Правила", "Выйти");
+                .AppendSuggestions("Простая игра", "Сложная игра", "Правила", "Выйти из игры");
             
             response.Payload.AutoListening = true;
         }
@@ -189,7 +189,7 @@ namespace SberBullsCows.Services
                         "Какую игру хочешь начать, простую или сложную? Можешь также попросить меня рассказать правила!"
                     )
                 )
-                .AppendSuggestions("Простая игра", "Сложная игра", "Правила", "Выйти");
+                .AppendSuggestions("Простая игра", "Сложная игра", "Правила", "Выйти из игры");
         }
 
         private void StartGame(SaluteRequest request, SaluteResponse response, UserState user, SessionState session, bool isHard)
@@ -214,7 +214,7 @@ namespace SberBullsCows.Services
                     $"Начнём новую игру! Я загадала слово из {lettersText}. Называй мне своё слово в ответ, а я " +
                     $"буду говорить, сколько в нём быков и коров."
                 ))
-                .AppendSuggestions("Правила", "Выйти");
+                .AppendSuggestions("Правила", "Выйти из игры");
 
             response.Payload.AutoListening = true;
         }
@@ -232,10 +232,10 @@ namespace SberBullsCows.Services
         {
             response
                 .AppendText(
-                    "Я загадываю слово, а игрок называет мне слова в ответ. Дальше считаем, сколько в его слове " +
-                    "коров и быков. Коровы — это буквы, которые есть в обоих слова, но не " +
+                    "<speak>Я загадываю слово, а игрок называет мне слова' в ответ. Дальше считаем, сколько в его слове " +
+                    "коров и быков. Коровы — это буквы, которые есть в обоих слова'х, но не " +
                     "стоят на своём месте. А быки — те буквы, которые полностью совпадают у двух слов! " +
-                    "Таким образом, игрок должен вычислить загаданное слово по буквам."
+                    "Таким образом, игрок должен вычислить загаданное слово по буквам.</speak>"
                 )
                 .AppendSendData("show_rules", "");
 
@@ -263,7 +263,7 @@ namespace SberBullsCows.Services
                     )
                 )
                 .AppendSendData("state", JsonConvert.SerializeObject(session))
-                .AppendSuggestions("Простая игра", "Сложная игра", "Правила", "Выйти");
+                .AppendSuggestions("Простая игра", "Сложная игра", "Правила", "Выйти из игры");
 
             response.Payload.AutoListening = true;
         }

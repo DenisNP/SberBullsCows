@@ -19,6 +19,11 @@
     background: rgba(0, 0, 0, 0.4);
 }
 
+.rules img {
+    max-height: calc(100% - 80px);
+    max-width: calc(100% - 40px);
+}
+
 .menu-button {
     width: min(400px, calc(100vw - 60px));
     height: 100px;
@@ -112,7 +117,9 @@
     .rules-button {
         padding: 0 13px;
         font-size: 14px;
-        height: 35px;
+        height: 33px;
+        top: 7px;
+        right: 7px;
     }
 }
 
