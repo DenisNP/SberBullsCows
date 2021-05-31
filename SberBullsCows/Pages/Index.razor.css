@@ -105,10 +105,6 @@
     height: 40px;
 }
 
-.disable-emoji {
-    font-family: "Segoe UI Symbol", serif;
-}
-
 @media (max-width: 767px) {
     .main-container {
         font-size: 23px;
@@ -123,8 +119,13 @@
         font-size: 14px;
         height: 33px;
         top: 20px;
-        left: 20px!important;
+        left: 20px;
         right: unset!important;
+    }
+    
+    .move-button {
+        top: 7px;
+        left: 7px;
     }
 }
 

@@ -44,6 +44,6 @@ else if (!State.GameStarted)
         </div>
     </div>
 }
-<button class="rules-button @(RulesOpened ? "disable-emoji" : "")" @onclick="ShowHideRules">
-    @(RulesOpened ? "✖" : "Правила")
+<button class="rules-button@((!RulesOpened && State.GameStarted) ? " move-button" : "")" @onclick="ShowHideRules">
+    @(RulesOpened ? "X" : "Правила")
 </button>
