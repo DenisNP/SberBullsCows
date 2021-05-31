@@ -63,14 +63,10 @@ namespace SberBullsCows.Services
                 StartGame(request, response, user, session, false);
 
             else if (session.GameStarted) // game started, got new guess from player
-            {
                 HandleNewWord(request, response, session, user);
-            }
             else
-            {
-                HandleDontKnow(request, response);
-            }
-            
+                HandleDontKnow(request, response, session);
+
             return response;
         }
 
@@ -187,7 +183,7 @@ namespace SberBullsCows.Services
             response.Payload.AutoListening = true;
         }
 
-        private void HandleDontKnow(SaluteRequest request, SaluteResponse response)
+        private void HandleDontKnow(SaluteRequest request, SaluteResponse response, SessionState session)
         {
             response
                 .AppendText(
@@ -198,6 +194,7 @@ namespace SberBullsCows.Services
                         "Какую игру хочешь начать, простую или сложную? Можешь также попросить меня рассказать правила!"
                     )
                 )
+                .AppendSendData("state", JsonConvert.SerializeObject(session))
                 .AppendSuggestions("Простая игра", "Сложная игра", "Правила", "Выйти из игры");
         }
 
