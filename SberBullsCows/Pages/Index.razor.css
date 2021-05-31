@@ -105,6 +105,10 @@
     height: 40px;
 }
 
+.disable-emoji {
+    font-family: "Segoe UI Symbol", serif;
+}
+
 @media (max-width: 767px) {
     .main-container {
         font-size: 23px;
