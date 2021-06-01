@@ -83,7 +83,7 @@ namespace SberBullsCows.Services
                 response
                     .AppendText($"Слово {word} слишком короткое!")
                     .AppendSuggestions("Помощь", "Выйти из игры");
-                response.Payload.AutoListening = true;
+                response.EnableAutoListening();
                 return;
             }
             
@@ -136,7 +136,7 @@ namespace SberBullsCows.Services
                 )
                 .AppendSuggestions("Правила", "Выйти из игры");
             
-            response.Payload.AutoListening = true;
+            response.EnableAutoListening();
         }
 
         private void FinishGame(SaluteRequest request, SaluteResponse response, SessionState session, UserState user)
@@ -180,7 +180,7 @@ namespace SberBullsCows.Services
                 .AppendSendData("state", JsonConvert.SerializeObject(session))
                 .AppendSuggestions("Простая игра", "Сложная игра", "Правила", "Выйти из игры");
             
-            response.Payload.AutoListening = true;
+            response.EnableAutoListening();
         }
 
         private void HandleDontKnow(SaluteRequest request, SaluteResponse response, SessionState session)
@@ -222,7 +222,7 @@ namespace SberBullsCows.Services
                 ))
                 .AppendSuggestions("Правила", "Выйти из игры");
 
-            response.Payload.AutoListening = true;
+            response.EnableAutoListening();
         }
 
         private void HandleExit(SaluteRequest request, SaluteResponse response)
@@ -248,7 +248,7 @@ namespace SberBullsCows.Services
             if (!sessionState.GameStarted)
                 response.AppendSuggestions("Простая игра", "Сложная игра");
             
-            response.Payload.AutoListening = true;
+            response.EnableAutoListening();
         }
 
         private void HandleEnter(SaluteRequest request, SaluteResponse response, UserState user)
@@ -271,7 +271,7 @@ namespace SberBullsCows.Services
                 .AppendSendData("state", JsonConvert.SerializeObject(session))
                 .AppendSuggestions("Простая игра", "Сложная игра", "Правила", "Выйти из игры");
 
-            response.Payload.AutoListening = true;
+            response.EnableAutoListening();
         }
     }
 }
